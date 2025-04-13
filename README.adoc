@@ -1,0 +1,90 @@
+== Overview
+
+This Spring Boot application demonstrates a multi-tenant architecture using dual datasources. It allows applications to dynamically switch between different database connections based on tenant context, making it suitable for SaaS applications serving multiple client organizations with isolated data.
+
+== Features
+
+* Multi-tenant database architecture
+* Dynamic datasource routing
+* Support for PostgreSQL databases
+* RESTful API endpoints for tenant-specific operations
+* Transaction management across tenant contexts
+
+== Technology Stack
+
+* Java 21
+* Spring Boot 3.4.4
+* Spring Data JPA
+* Spring MVC
+* Lombok
+* PostgreSQL
+
+== Configuration
+
+The application uses properties-based configuration to manage datasource connections:
+
+=== Application Properties
+Configure the datasources in `application.properties`:
+```
+# Common datasource
+spring.datasource.common.url=<common_database_url>
+spring.datasource.common.username=<common_database_username>
+spring.datasource.common.password=<common_database_password>
+
+# Tenant datasources
+multitenancy.datasources.tenant1.url=<tenant1_database_url>
+multitenancy.datasources.tenant1.username=<tenant1_database_username>
+multitenancy.datasources.tenant1.password=<tenant1_database_password>
+multitenancy.datasources.tenant2.url=<tenant2_database_url>
+multitenancy.datasources.tenant2.username=<tenant2_database_username>
+multitenancy.datasources.tenant2.password=<tenant2_database_password>
+```
+
+== Project Structure
+
+* `DemoMultiTenantDualDatasourceApplication.java`: Main application entry point
+* `DatasourceConfigCommon.java`: Configuration for common datasource
+* `DatasourceConfigTenant.java`: Configuration for tenant-specific datasources
+* `MultiTenantConnectionProvider.java`: Handles tenant-specific database connections
+* `MultiTenantController.java`: REST controller for tenant operations
+* `MultitenancyProperties.java`: Properties configuration for multi-tenancy
+* `TransactionalHandlerChain.java`: Transaction management across datasources
+* `CombinedDataDto.java`: Data transfer object for combined tenant data
+
+== Getting Started
+
+=== Prerequisites
+
+* JDK 21
+* Maven
+* PostgreSQL database instances
+
+=== Building the Application
+
+```bash
+mvn clean install
+```
+
+=== Running the Application
+
+```bash
+mvn spring-boot:run
+```
+
+Or use the generated JAR file:
+
+```bash
+java -jar target/demo-multi-tenant-dual-datasource-0.0.1-SNAPSHOT.jar
+```
+
+== API Endpoints
+
+The application exposes REST endpoints to interact with tenant-specific data. See `MultiTenantController.java` for details on available endpoints.
+
+== License
+
+This project is provided as-is without any warranties or conditions. Use at your own risk.
+
+== Contributors
+
+* Your Name pparin8@gmail.com
